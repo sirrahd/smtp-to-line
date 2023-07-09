@@ -1,0 +1,4 @@
+aiosmtpd
+imutils
+opencv-python-headless
+line-bot-sdk
