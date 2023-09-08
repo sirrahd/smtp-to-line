@@ -88,7 +88,7 @@ class Message:
         ).strip()
 
         if len(self.formatted_message) > self.LINE_MSG_LIMIT and config.WEB_ROOT:
-            self.attachments.append(os.path.join(self.web_path, full_message))
+            self.attachments.append(os.path.join(self.web_path, 'full_message.txt'))
         self.formatted_message = self.formatted_message[:self.LINE_MSG_LIMIT].strip()
 
         self.payload.append(TextMessage(text=self.formatted_message))
