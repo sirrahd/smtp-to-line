@@ -131,7 +131,7 @@ class Message:
                     cv2.imwrite(preview_path, imutils.resize(image, width=MAX_THUMB))
                 self.images.append(ImageMessage(originalContentUrl=fileurl, previewImageUrl=preview_url))
             else:
-                self.images.append(ImageMessage(originalContentUrl=fileurl))
+                self.images.append(ImageMessage(originalContentUrl=fileurl, previewImageUrl=fileurl))
                     
     def add_attachment(self, part, filename_fallback=None):
         filename = self.write_part(part, filename_fallback)
