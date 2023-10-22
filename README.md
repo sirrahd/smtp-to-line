@@ -6,13 +6,13 @@ Use it as an SMTP server for webcams, selfhosted services, development environme
 ## Getting started
 1. Set up your LINE developer account and channel: https://developers.line.biz/en/docs/messaging-api/getting-started/
 2. Retrieve your user ID and channel access token from the channel in the [LINE developers console](https://developers.line.biz/console/) (Basic Settings->Your user ID; Messaging API-> Channel access token)
-3. Run `smtp-to-line` in a Docker container:
+3. Run `smtp-to-line` in a Docker container by cloning this repository and running this command:
 ```
 docker run \
     --name smtp-to-line \
     -e SL_LINE_CHANNEL_ACCESS_TOKEN=<TOKEN> \
     -e SL_LINE_USER_ID=<ID> \
-    docker.io/sirrahd/smtp-to-line
+    $(docker build -q .)
 ```
 4. `smtp-to-line` listens for incoming SMTP traffic on port 8025
 
@@ -37,7 +37,7 @@ Define a custom message template for LINE notifications with the environment var
 ### STARTTLS encryption
 Specify the path to a `SL_SSL_CERT_FILE` and `SL_SSL_KEY_FILE` in PEM format to enable STARTTLS encryption.
 
-Alternatively, `smtp-to-telegram` can use the first certificate in a [Traefik resolvers](https://doc.traefik.io/traefik/https/acme/) file with the `SL_TRAEFIK_CERT_PATH` environment variable.
+Alternatively, `smtp-to-line` can use the first certificate in a [Traefik resolvers](https://doc.traefik.io/traefik/https/acme/) file with the `SL_TRAEFIK_CERT_PATH` environment variable.
 
 ### Authentication
 By default `smtp-to-line` will accept any SMTP request and fake successful authentication if credentials are provided. To require real authentication for all requests, provide space-separated uesrnames and passwords in the `SL_AUTH` environment variable.
@@ -49,7 +49,7 @@ These example docker-compose services enable all features and provide an nginx w
 
 ```
   smtp-to-line:
-    image: docker.io/sirrahd/smtp-to-line
+    build: https://github.com/sirrahd/smtp-to-line.git
     ports:
       - "587:8025"
     environment:
