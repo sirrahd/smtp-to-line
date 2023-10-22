@@ -1,4 +1,4 @@
-FROM docker.io/library/python:3
+FROM docker.io/library/python:3.11
 
 EXPOSE 8025
 
